@@ -20,14 +20,7 @@
 			var queryString = window.location.search;
 			var urlParams = new URLSearchParams(queryString);
 
-
-
-			$('#item').val(1);
-			$('#payment').val(1);
-
-			$('#location').val(1);
-			$('#transaction_type').val(1);
-			$('#category').val(1);
+			$('#category').val(urlParams.get('category'));
 		});
 		
 		$('#sure').click(function (e) {
