@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8">
-    <title>訂票</title>
+    <title>帳目資訊</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <style>
         .input-label {
@@ -15,42 +15,35 @@
 <body style="background-color: #D3C4E3">
     <div class="container" style="margin-top: 20vh; display: grid; grid-template-columns: repeat(2, 1fr); grid-gap: 10px;">
         <div>
-            <label class="input-label">輸入一段話1</label>
+            <label class="input-label">使用者LineID</label>
             <input type="text" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
         </div>
         <div>
-            <label class="input-label">輸入一段話2</label>
+            <label class="input-label">項目名稱</label>
             <input type="text" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
         </div>
         <div>
-            <label class="input-label">輸入一段話3</label>
+            <label class="input-label">交易類型</label>
             <input type="text" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
         </div>
         <div>
-            <label class="input-label">輸入一段話4</label>
+            <label class="input-label">日期</label>
             <input type="text" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
         </div>
         <div>
-            <label class="input-label">輸入一段話5</label>
+            <label class="input-label">地點</label>
             <input type="text" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
         </div>
         <div>
-            <label class="input-label">輸入一段話6</label>
+            <label class="input-label">金額</label>
             <input type="text" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
         </div>
         <div>
-            <label class="input-label">輸入一段話7</label>
+            <label class="input-label">詳細資訊/備註</label>
             <input type="text" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
         </div>
-        <div>
-            <label class="input-label">輸入一段話8</label>
-            <input type="text" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
-        </div>
-        <div>
-            <label class="input-label">輸入一段話9</label>
-            <input type="text" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
-        </div>
-        <button id="btn_reserve" class="btn btn-primary" style="grid-column: span 2;height: 40px;border-radius: 10px;font-size: 16px;">輸入</button>
+        <button id="btn_tmp" class="btn btn-primary" style="grid-column: span 2;height: 40px;border-radius: 10px;font-size: 16px;">暫存</button>
+        <button id="btn_enter" class="btn btn-primary" style="grid-column: span 2;height: 40px;border-radius: 10px;font-size: 16px;">確認</button>
     </div>
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script>
