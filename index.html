@@ -2,89 +2,74 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta charset="utf-8">
-    <title>帳目資訊</title>
+    <title>表單</title>
+    <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-    <style>
-        .input-label {
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+	function initializeApp(data) {  //初始化LIFF
+		var userid = data.context.userId;  //取得ID
+	}
+
+	function pushMsg(pname, pdatatime, proom) {
+		if (pname == '' || pdatatime == '' || proom == '') {  //資料檢查
+			alert('每個項目都必須輸入！');
+			return;
+		}
+		var msg = "###";  //回傳訊息字串
+		msg = msg + pname + "/";
+		msg = msg + amount + "/";
+		msg = msg + pdatatime + "/";
+		msg = msg + proom;
+		liff.sendMessages([  //推播訊息
+			{ type: 'text',
+			  text: msg
+			}
+		])
+			.then(() => {
+				liff.closeWindow();  //關閉視窗
+			});
+	}
+
+	$(document).ready(function () {
+		liff.init(function (data) {  //初始化LIFF
+			initializeApp(data);
+		});
+		
+		$('#sure').click(function (e) {  //按下確定鈕
+			pushMsg($('#name').val(), $('#datetime').val(), $('#sel_room').val());
+		});
+	});
+</script>
 </head>
-<body style="background-color: #D3C4E3">
-    <div class="container" style="margin-top: 20vh; display: grid; grid-template-columns: repeat(2, 1fr); grid-gap: 10px;">
-        <div>
-            <label class="input-label">使用者LineID</label>
-            <input type="text" id="LineID" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
+<body>
+    <div class="row" style="margin: 10px">
+        <div class="col-12" style="margin: 10px">
+            <label>User_ID</label>
+            <input type="text" id="User_ID" class="form-control" />
+            <br />
+            <label>項目</label>
+            <input type="text" id="item" class="form-control" />
+            <br />
+            <label>金額</label>
+            <input type="number" id="payment" class="form-control" />
+            <br />
+            <label>時間</label>
+            <input type="text" id="datetime" class="form-control" />
+            <br />
+            <label>地點</label>
+            <input type="text" id="location" class="form-control" />
+            <br />
+            <label>交易類型</label>
+            <input type="text" id="transaction_type" class="form-control" />
+            <br />
+            <label>類別</label>
+            <input type="text" id="category" class="form-control" />
+            <br />
+            <button class="btn btn-warning btn-block" id="tempory">暫存</button>
+            <button class="btn btn-warning btn-block" id="sure">完成確定</button>
         </div>
-        <div>
-            <label class="input-label">項目名稱</label>
-            <input type="text" id="name" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
-        </div>
-        <div>
-            <label class="input-label">交易類型</label>
-            <input type="text" id="type" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
-        </div>
-        <div>
-            <label class="input-label">日期</label>
-            <input type="text" id="date" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
-        </div>
-        <div>
-            <label class="input-label">地點</label>
-            <input type="text" id="location" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
-        </div>
-        <div>
-            <label class="input-label">金額</label>
-            <input type="text" id="money" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
-        </div>
-        <div>
-            <label class="input-label">詳細資訊/備註</label>
-            <input type="text" id="detail" class="form-control" style="height: 40px;border-radius: 10px;padding: 10px;font-size: 16px;border: 1px solid #ced4da;">
-        </div>
-        <button id="btn_tmp" class="btn btn-primary" style="grid-column: span 2;height: 40px;border-radius: 10px;font-size: 16px;">暫存</button>
-        <button id="btn_enter" class="btn btn-primary" style="grid-column: span 2;height: 40px;border-radius: 10px;font-size: 16px;">確認</button>
     </div>
-    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-    <script>
-        var liffID = '2004983305-Wxv3l2rx';
-
-        $(document).ready(function() {
-            $('#btn_reserve').click(function() {
-                var inputs = $('.form-control');
-                var msg = "###";
-                inputs.each(function(index, element) {
-                    var text = $(element).val().trim();
-                    if (text === '') {
-                        alert("輸入一段話");
-                        return;
-                    }
-                    msg += text + " ";
-                });
-                reserve(msg.trim());
-            });
-        });
-
-        function reserve(msg) {
-            liff.init({
-                liffId: liffID
-            }).then(() => {
-                var isInClient = liff.isInClient();
-                console.log('isInClient', isInClient);
-                return liff.sendMessages([
-                    {
-                        type: 'text',
-                        text: msg
-                    }
-                ]);
-            }).then(() => {
-                console.log('訊息已發送');
-               liff.closeWindow();
-            }).catch((err) => {
-                console.error('訊息發送失敗', err);
-            });
- 
-        }
-    </script>
 </body>
 </html>
