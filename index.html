@@ -33,8 +33,31 @@
                                  ("0" + currentDateTime.getMinutes()).slice(-2) + ":" +
                                  ("0" + currentDateTime.getSeconds()).slice(-2);
 		document.getElementById("datetime").value = formattedDateTime;
-		$('#sure').click(function (e) {
-
+		
+		function pushMsg(User_id,item,payment,datetime,location,transaction_type,category) {
+			if (User_id == '' || item == '' || payment == '' || datetime == '' || location == '' || transaction_type == '' || category == '') {  //資料檢查
+				alert('每個項目都必須輸入！');
+				return;
+			}
+			var msg = "###";  //回傳訊息字串
+			msg = msg + User_id + "/";
+			msg = msg + item + "/";
+			msg = msg + payment + "/";
+			msg = msg + datetime+ "/";
+			msg = msg + location+ "/";
+			msg = msg + transaction_type+ "/";
+			msg = msg + category+ "/";
+			liff.sendMessages([  //推播訊息
+				{ type: 'text',
+			  	text: msg
+				}
+			])
+				.then(() => {
+					liff.closeWindow();  //關閉視窗
+				});
+		}
+		$('#sure').click(function (e) {  //按下確定鈕
+			pushMsg($('#User_ID').val(), $('#item').val(), $('#payment').val(), $('#datetime').val(), $('#location').val(), $('#transaction_type').val(), $('#category').val());
 		});
 	});
 </script>
