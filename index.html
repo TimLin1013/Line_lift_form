@@ -13,40 +13,7 @@
 		var userid = data.context.userId;
 		 
 	}
-	function pushMsg(puser_id,pitem,ppayment,pdatetime,plocation,ptransaction_type,pcategory) {
-		if (puser_id == '' || pitem == '' || ppayment == '' || pdatetime == '' || plocation == '' || ptransaction_type == '' || pcategory == '') {  //資料檢查
-			alert('每個項目都必須輸入！');
-			return;
-		}
-		var msg = "###";  //回傳訊息字串
-		msg = msg + puser_id + "/";
-		msg = msg + pitem + "/";
-		msg = msg + ppayment + "/";
-		msg = msg + pdatetime+ "/";
-		msg = msg + plocation+ "/";
-		msg = msg + ptransaction_type+ "/";
-		msg = msg + pcategory+ "/";
-		reverse(msg);
-	}
-	function reverse(msg) {
-   	   liff.init({
-          liffId: liffID
-         }).then(() => {
-           var isInClient = liff.isInClient();
-           console.log('isInClient', isInClient);
-           return liff.sendMessages([
-              {
-                  type: 'text',
-                  text: msg
-              }
-          ]);
-      }).then(() => {
-          console.log('訊息已發送');
-          liff.closeWindow();
-       }).catch((err) => {
-          console.error('訊息發送失敗', err);
-      });
-}
+
 	$(document).ready(function () {
 		liff.init(function (data) {
 			initializeApp(data);
@@ -69,17 +36,6 @@
 		document.getElementById("datetime").value = formattedDateTime;
 		
 		$('#sure').click(function (e) {  //按下確定鈕
-			if (liff.isInClient()) {
-        			pushMsg($('#User_ID').val(), $('#item').val(), $('#payment').val(), $('#datetime').val(), $('#location').val(), $('#transaction_type').val(), $('#category').val());
-   			 } else {
-       				 liff.init({
-            				liffId: liffID
-        			}).then(() => {
-            				pushMsg($('#User_ID').val(), $('#item').val(), $('#payment').val(), $('#datetime').val(), $('#location').val(), $('#transaction_type').val(), $('#category').val());
-        			}).catch((err) => {
-           				 console.error('LIFF 初始化失敗', err);
-       		 		});
-   			 }
 		});
 	});
 </script>
