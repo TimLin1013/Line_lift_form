@@ -25,9 +25,14 @@
 		$('#location').val(urlParams.get('location'));
 		$('#category').val(urlParams.get('category'));
 		$('#transaction_type').val(urlParams.get('transaction_type'));
-		var now = new Date();
-    		var formattedDateTime = now.getFullYear() + '-' + addZero(now.getMonth() + 1) + '-' + addZero(now.getDate()) + ' ' + addZero(now.getHours()) + ':' + addZero(now.getMinutes()) + ':' + addZero(now.getSeconds());
-    		$('#datetime').val(formattedDateTime);
+		var currentDateTime = new Date();
+        	 var formattedDateTime = currentDateTime.getFullYear() + "-" +
+                                 ("0" + (currentDateTime.getMonth() + 1)).slice(-2) + "-" +
+                                 ("0" + currentDateTime.getDate()).slice(-2) + " " +
+                                 ("0" + currentDateTime.getHours()).slice(-2) + ":" +
+                                 ("0" + currentDateTime.getMinutes()).slice(-2) + ":" +
+                                 ("0" + currentDateTime.getSeconds()).slice(-2);
+		document.getElementById("datetime").value = formattedDateTime;
 		$('#sure').click(function (e) {
 
 		});
