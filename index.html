@@ -10,7 +10,7 @@
 <script>
 	function initializeApp(data) {
 		var userid = data.context.userId;
-		 $('#User_ID').val(userid); 
+		 
 	}
 
 	$(document).ready(function () {
@@ -19,12 +19,14 @@
 		});
 		var queryString = window.location.search;
 		var urlParams = new URLSearchParams(queryString);
+		$('#User_ID').val(userid); 
 		$('#item').val(urlParams.get('item'));
 		$('#payment').val(urlParams.get('amount'));
 		$('#location').val(urlParams.get('location'));
 		$('#category').val(urlParams.get('category'));
-		var formattedDateTime = now.getFullYear() + '-' + addZero(now.getMonth() + 1) + '-' + addZero(now.getDate()) + ' ' + addZero(now.getHours()) + ':' + addZero(now.getMinutes()) + ':' + addZero(now.getSeconds());
-		$('#datetime').val(formattedDateTime);
+		var now = new Date();
+    		var formattedDateTime = now.getFullYear() + '-' + addZero(now.getMonth() + 1) + '-' + addZero(now.getDate()) + ' ' + addZero(now.getHours()) + ':' + addZero(now.getMinutes()) + ':' + addZero(now.getSeconds());
+    		$('#datetime').val(formattedDateTime);
 		$('#transaction_type').val(urlParams.get('transaction_type'));
 		$('#sure').click(function (e) {
 
