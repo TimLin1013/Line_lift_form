@@ -13,19 +13,19 @@
 		var userid = data.context.userId;
 		 
 	}
-	function pushMsg(User_id,item,payment,datetime,location,transaction_type,category) {
-		if (User_id == '' || item == '' || payment == '' || datetime == '' || location == '' || transaction_type == '' || category == '') {  //資料檢查
+	function pushMsg(puser_id,pitem,ppayment,pdatetime,plocation,ptransaction_type,pcategory) {
+		if (puser_id == '' || pitem == '' || ppayment == '' || pdatetime == '' || plocation == '' || ptransaction_type == '' || pcategory == '') {  //資料檢查
 			alert('每個項目都必須輸入！');
 			return;
 		}
 		var msg = "###";  //回傳訊息字串
-		msg = msg + User_id + "/";
-		msg = msg + item + "/";
-		msg = msg + payment + "/";
-		msg = msg + datetime+ "/";
-		msg = msg + location+ "/";
-		msg = msg + transaction_type+ "/";
-		msg = msg + category+ "/";
+		msg = msg + puser_id + "/";
+		msg = msg + pitem + "/";
+		msg = msg + ppayment + "/";
+		msg = msg + pdatetime+ "/";
+		msg = msg + plocation+ "/";
+		msg = msg + ptransaction_type+ "/";
+		msg = msg + pcategory+ "/";
 		reverse(msg);
 	}
 	 function reverse(msg) {
