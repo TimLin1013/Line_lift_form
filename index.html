@@ -70,7 +70,17 @@
 		document.getElementById("datetime").value = formattedDateTime;
 		
 		$('#sure').click(function (e) {  //按下確定鈕
-			pushMsg($('#User_ID').val(), $('#item').val(), $('#payment').val(), $('#datetime').val(), $('#location').val(), $('#transaction_type').val(), $('#category').val());
+			if (liff.isInClient()) {
+        			pushMsg($('#User_ID').val(), $('#item').val(), $('#payment').val(), $('#datetime').val(), $('#location').val(), $('#transaction_type').val(), $('#category').val());
+   			 } else {
+       				 liff.init({
+            				liffId: liffID
+        			}).then(() => {
+            				pushMsg($('#User_ID').val(), $('#item').val(), $('#payment').val(), $('#datetime').val(), $('#location').val(), $('#transaction_type').val(), $('#category').val());
+        			}).catch((err) => {
+           				 console.error('LIFF 初始化失敗', err);
+       		 		});
+   			 }
 		});
 	});
 </script>
