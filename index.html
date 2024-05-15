@@ -15,13 +15,11 @@
 	$(document).ready(function () {
 		liff.init(function (data) {
 			initializeApp(data);
-
+		});
 
 			var queryString = window.location.search;
 			var urlParams = new URLSearchParams(queryString);
-
 			$('#category').val(urlParams.get('category'));
-		});
 		
 		$('#sure').click(function (e) {
 
