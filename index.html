@@ -13,29 +13,40 @@
 		 
 	}
 	function pushMsg(User_id,item,payment,datetime,location,transaction_type,category) {
-			if (User_id == '' || item == '' || payment == '' || datetime == '' || location == '' || transaction_type == '' || category == '') {  //資料檢查
-				alert('每個項目都必須輸入！');
-				return;
-			}
-			var msg = "###";  //回傳訊息字串
-			msg = msg + User_id + "/";
-			msg = msg + item + "/";
-			msg = msg + payment + "/";
-			msg = msg + datetime+ "/";
-			msg = msg + location+ "/";
-			msg = msg + transaction_type+ "/";
-			msg = msg + category+ "/";
-			
-			liff.sendMessages([  //推播訊息
-				{ type: 'text',
-			  	text: msg
-				}
-			])
-				.then(() => {
-					liff.closeWindow();  //關閉視窗
-				});
+		if (User_id == '' || item == '' || payment == '' || datetime == '' || location == '' || transaction_type == '' || category == '') {  //資料檢查
+			alert('每個項目都必須輸入！');
+			return;
 		}
+		var msg = "###";  //回傳訊息字串
+		msg = msg + User_id + "/";
+		msg = msg + item + "/";
+		msg = msg + payment + "/";
+		msg = msg + datetime+ "/";
+		msg = msg + location+ "/";
+		msg = msg + transaction_type+ "/";
+		msg = msg + category+ "/";
+		reverse(msg);
+	}
+	 function reserve(msg) {
+            liff.init({
+                liffId: liffID
+            }).then(() => {
+                var isInClient = liff.isInClient();
+                console.log('isInClient', isInClient);
+                return liff.sendMessages([
+                    {
+                        type: 'text',
+                        text: msg
+                    }
+                ]);
+            }).then(() => {
+                console.log('訊息已發送');
+               liff.closeWindow();
+            }).catch((err) => {
+                console.error('訊息發送失敗', err);
+            });
 
+        }
 	$(document).ready(function () {
 		liff.init(function (data) {
 			initializeApp(data);
